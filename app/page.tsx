@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { ArrowRight, Bell, Check, ChevronRight, CircleHelp, Copy, Crown, Gauge, Headphones, Maximize2, Play, Radio, RotateCcw, ShieldCheck, Sparkles, Trophy, Users, Wifi, Zap } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { connectSocket, socket } from '@/lib/socket'
+import { connectSocket, emitWhenConnected, socket } from '@/lib/socket'
 
 const participantsSeed = [
   { name: 'Maya Chen', initials: 'MC', color: 'bg-cyan-400/20 text-cyan-300', time: 347.286, online: true, points: 27 },
@@ -45,7 +45,7 @@ function Setup({ mode, navigate }: { mode: 'create' | 'join'; navigate: (p: stri
   const submit = () => {
     const roomCode = code.toUpperCase()
     connectSocket()
-    socket.emit(mode === 'create' ? 'create-room' : 'join-room', mode === 'create' ? { hostName: name, roomName: event } : { roomCode, participantName: name }, (result: { ok: boolean; error?: string; roomCode?: string; participantId?: string; sessionToken?: string }) => {
+    emitWhenConnected(mode === 'create' ? 'create-room' : 'join-room', mode === 'create' ? { hostName: name, roomName: event } : { roomCode, participantName: name }, (result: { ok: boolean; error?: string; roomCode?: string; participantId?: string; sessionToken?: string }) => {
       if (!result.ok) return window.alert(result.error || 'Unable to connect to room.')
       sessionStorage.setItem('buzzr-session', JSON.stringify({ roomCode: result.roomCode || roomCode, participantId: result.participantId, sessionToken: result.sessionToken, name }))
       navigate(mode === 'create' ? 'host' : 'participant')
