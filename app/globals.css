@@ -1,0 +1,38 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  color-scheme: dark;
+  --background: #080b12;
+  --foreground: #f8fafc;
+  --card: #151c2b;
+  --card-foreground: #f8fafc;
+  --popover: #151c2b;
+  --popover-foreground: #f8fafc;
+  --primary: #00e5ff;
+  --primary-foreground: #071017;
+  --secondary: #1b2435;
+  --secondary-foreground: #f8fafc;
+  --muted: #101522;
+  --muted-foreground: #94a3b8;
+  --accent: #1d2940;
+  --accent-foreground: #f8fafc;
+  --destructive: #ff3b4f;
+  --border: rgba(255,255,255,.1);
+  --input: rgba(255,255,255,.12);
+  --ring: #00e5ff;
+  --radius: .75rem;
+}
+
+@theme inline {
+  --color-background: var(--background); --color-foreground: var(--foreground); --color-card: var(--card); --color-card-foreground: var(--card-foreground); --color-popover: var(--popover); --color-popover-foreground: var(--popover-foreground); --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground); --color-secondary: var(--secondary); --color-secondary-foreground: var(--secondary-foreground); --color-muted: var(--muted); --color-muted-foreground: var(--muted-foreground); --color-accent: var(--accent); --color-accent-foreground: var(--accent-foreground); --color-destructive: var(--destructive); --color-border: var(--border); --color-input: var(--input); --color-ring: var(--ring);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: Arial, Helvetica, sans-serif; }
+button, input { font: inherit; }
+.font-mono { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; }
